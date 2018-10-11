@@ -18,6 +18,34 @@ var listingSchema = new Schema({
     latitude: Number, 
     longitude: Number
   },
+  rating: {
+    type: Number,
+    default: 0
+  },
+  //The array of classrooms each building holds.
+  classRoomArray: [
+    {
+      roomNumber: {
+        type: Number,
+        required: true
+      },
+      rating: {
+        likes: {
+          type: Number,
+          default: 0
+        },
+        dislikes: {
+          type: Number,
+          default: 0
+        }
+      },
+    description: String, 
+    isOccupied: Boolean,
+    size: Number,
+    outlets: Number,
+    hasWhiteboard: Boolean,
+    hasBlackboard: Boolean
+  }],
   created_at: Date,
   updated_at: Date
 });

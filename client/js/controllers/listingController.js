@@ -10,18 +10,23 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     $scope.detailedInfo = undefined;
 
     $scope.addListing = function() {
-	  /**TODO 
-	  *Save the article using the Listings factory. If the object is successfully 
-	  saved redirect back to the list page. Otherwise, display the error
-	 */
+
+      Listings.create($scope.newListing).then(function(response) {}, function(error) {
+        console.log('Unable to add listing:', error);
+      });
+
+      //Refresh the page
+      location.reload();
     };
 
     $scope.deleteListing = function(index) {
-	   /**TODO
-        Delete the article using the Listings factory. If the removal is successful, 
-		navigate back to 'listing.list'. Otherwise, display the error. 
-       */
-    };
+
+      Listings.delete($scope.listings[index]._id).then(function(response) {}, function(error) {
+        console.log('Unable to delete listing:', error);
+      });
+      //Refresh the page upon deletion.
+      location.reload();
+  };
 
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.listings[index];
