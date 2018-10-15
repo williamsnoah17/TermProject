@@ -18,7 +18,7 @@ Our application allows students to not only add and rate classrooms but also pro
 
 McKenna Ville - Scrum Master
 
-Alex Katrox - Product Manager / Lost Laptop
+Alex Katros - Product Manager
 
 Noah Williams - Backend Dev
 
