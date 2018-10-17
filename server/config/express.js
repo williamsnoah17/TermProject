@@ -22,7 +22,7 @@ module.exports.init = function() {
   
   
   //Serve static files
-    app.use(express.static('client'));
+  app.use(express.static('client'));
   
 
    

@@ -50,7 +50,7 @@ var listingSchema = new Schema({
   updated_at: Date
 });
 
-/* create a 'pre' function that adds the updated_at (and created_at if not already there) property */
+/* create a 'pre' function that adds the updated_at (and created_at if not already there) property as well  implemenet the ratings system */
 listingSchema.pre('save', function(next) {
   var currentTime = new Date;
   this.updated_at = currentTime;
@@ -58,6 +58,14 @@ listingSchema.pre('save', function(next) {
   {
     this.created_at = currentTime;
   }
+
+  //Find the sum of the ratings - maybe an ERROR w/ const before classroom in here.
+  this.rating = 0;
+  this.classRoomArray.forEach(classroom => {
+    this.rating += classroom.rating.likes;
+    this.rating -= classroom.rating.dislikes;
+  });
+
   next();
 });
 
