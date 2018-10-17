@@ -2,4 +2,4 @@
 angular.module('listings', []);
 
 /* register the application and inject all the necessary dependencies */
-var app = angular.module('nullSpace', ['listings']);
+var app = angular.module('nullClass', ['listings']);
