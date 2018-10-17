@@ -34,10 +34,10 @@
     
     <script>
     //Initialize map
-mapboxgl.accessToken = 'pk.eyJ1IjoibnVsbGNsYXNzIiwiYSI6ImNqbjBrYnR3eTAxMHcza200c3J6dDZ6dTYifQ.SISRlcNpNBI4cI_BF2U07w';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXhrYXRyb3MiLCJhIjoiY2puMXR0NjY1MDF3cDNxbzNkdWVhdWdueCJ9.r6DamuPvqsyrf2BE610D3Q';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v9',
+    style: 'mapbox://styles/axkatros/cjndaxcho12z62slq5a7hzg5z',
     center: [-82.3473,29.6486], // starting position
     zoom: 15 // starting zoom
 });
@@ -49,31 +49,7 @@ map.on('load', function () {
     // Add a layer showing the places.
     //Just testing out this feature, mapped Marston with a star
     //Working on figuring out how to utilize places already marked
-    map.addLayer({
-        "id": "places",
-        "type": "symbol",
-        "source": {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "properties": {
-                        "description": "<p>Marston Science Library</p>",
-                        "icon": "star"
-                    },
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [-82.343952, 29.648069]
-                    }
-                }]
-            }
-        },
-        "layout": {
-            "icon-image": "{icon}-15",
-            "icon-allow-overlap": true
-        }
-    });
+    
 
     // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.
@@ -93,6 +69,24 @@ map.on('load', function () {
             .setHTML(description)
             .addTo(map);
     });
+    //testing clickable points
+    map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['null-class-v2'] // replace this with the name of the layer
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Code + '</p>')
+    .setLngLat(feature.geometry.coordinates)
+    .addTo(map);
+});
 
     // Change the cursor to a pointer when the mouse is over the places layer.
     map.on('mouseenter', 'places', function () {
