@@ -25,7 +25,12 @@
             </div>
             <div class="col-md-4 right">
                 <div id="listBar">
-                    <h1 class="dummyText">listBar</h1>
+                    <table class="table table-striped table-hover">
+                        <tr ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
+                            <td class="tableData">{{place.code}}</td>
+                            <td class="tableData">{{place.name}}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
