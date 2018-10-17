@@ -39,6 +39,7 @@
 	height: 100%;
 }
 
-.tableData {
-	font-weight: bolder;
+.buildingButton {
+	width: 100%;
+	height: 3em;
 }

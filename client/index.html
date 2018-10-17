@@ -25,11 +25,15 @@
             </div>
             <div class="col-md-4 right">
                 <div id="listBar">
-                    <table class="table table-striped table-hover">
-                        <tr ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
-                            <td class="tableData">{{place.code}}</td>
-                            <td class="tableData">{{place.name}}</td>
-                        </tr>
+                    <table class="table table-striped table-hover dataTable">
+                        <div>
+                        <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
+                                <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                                <div class="classrooms{{$index}} collapse">
+                                    The person who stole your laptop went into this building.
+                                </div>
+                        </div>
+                        </div>
                     </table>
                 </div>
             </div>
