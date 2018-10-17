@@ -33,14 +33,14 @@
     };
 
     $scope.searchFilterCustom = function(entry) {
-     
+
       return function(entry) {
         if(typeof $scope.filterText == 'undefined')
         {
           return entry;
         }
-        
-        if(entry.name.includes($scope.filterText) || entry.code.includes($scope.filterText))
+
+        if(entry.code.toLowerCase().includes($scope.filterText.toLowerCase()) || entry.name.toLowerCase().includes($scope.filterText.toLowerCase())) 
         {
          return entry;
        }
