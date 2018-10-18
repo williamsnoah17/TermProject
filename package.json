@@ -1,6 +1,10 @@
 {
   "name": "Assignment4",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.4",
+    "npm": "6.4.1"
+  },
   "description": "Routing server-side requests using ExpressJS",
   "main": "server.js",
   "author": "Medhir Bhargava",
@@ -17,7 +21,7 @@
     "should": "^7.1.1",
     "supertest": "^1.1.0"
   },
-  "engines": {
-    "node": "8.11.4"
-  }
+  "scripts": {
+    "start": "node server.js"
+}
 }
