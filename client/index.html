@@ -12,39 +12,48 @@
 </head>
 <body ng-app="nullClass">
     <div class="container">
-        <div class="row" id="header">
-            <h1>Null Class</h1>
-        </div>
-        <div class="row" ng-controller="ListingsController">
-            <div class="col-md-7 left">
-                <div id="map">
-                </div>
-                <div id="details">
-                    <h1 class="dummyText">details</h1>
-                </div>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Null Space</a>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              </ul>
+          </div>
+      </nav>
+      <div class="row" ng-controller="ListingsController">
+        <div class="col-md-7 left">
+            <div id="map">
             </div>
-            <div class="col-md-4 right">
-                <div id="listBar">
-                    <div class="input-group" id="searchBar">
-                        <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
-                         <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
+            <div id="details">
+                <h1 class="dummyText">details</h1>
+            </div>
+        </div>
+        <div class="col-md-4 right">
+            <div id="listBar">
+                <div class="input-group" id="searchBar">
+                    <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+                    <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
+                </div>
+                <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
+                    <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                    <div class="classrooms{{$index}} collapse">
+                        The person who stole your laptop went into {{place.name}}.
                     </div>
-                        <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
-                                <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
-                                <div class="classrooms{{$index}} collapse">
-                                    The person who stole your laptop went into {{place.name}}.
-                                </div>
-                        </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    
-    <script>
+
+<script>
     //Initialize map
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXhrYXRyb3MiLCJhIjoiY2puMXR0NjY1MDF3cDNxbzNkdWVhdWdueCJ9.r6DamuPvqsyrf2BE610D3Q';
-var map = new mapboxgl.Map({
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYXhrYXRyb3MiLCJhIjoiY2puMXR0NjY1MDF3cDNxbzNkdWVhdWdueCJ9.r6DamuPvqsyrf2BE610D3Q';
+    var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/axkatros/cjndaxcho12z62slq5a7hzg5z',
     center: [-82.3473,29.6486], // starting position
@@ -74,23 +83,23 @@ map.on('load', function () {
         }
 
         new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
+        .setLngLat(coordinates)
+        .setHTML(description)
+        .addTo(map);
     });
     //testing clickable points
     map.on('click', function(e) {
-  var features = map.queryRenderedFeatures(e.point, {
+      var features = map.queryRenderedFeatures(e.point, {
     layers: ['null-class-v2'] // replace this with the name of the layer
-  });
+});
 
-  if (!features.length) {
-    return;
-  }
+      if (!features.length) {
+        return;
+    }
 
-  var feature = features[0];
+    var feature = features[0];
 
-  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
     .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Code + '</p>')
     .setLngLat(feature.geometry.coordinates)
@@ -107,13 +116,13 @@ map.on('load', function () {
         map.getCanvas().style.cursor = '';
     });
 });
-    </script>
+</script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/factories/listingFactory.js"></script>
-    <script src="js/controllers/listingController.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+<script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+<script src="js/app.js"></script>
+<script src="js/factories/listingFactory.js"></script>
+<script src="js/controllers/listingController.js"></script>
 </body>
 </html>
