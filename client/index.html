@@ -52,10 +52,10 @@
 
 <script>
     //Initialize map
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYXhrYXRyb3MiLCJhIjoiY2puMXR0NjY1MDF3cDNxbzNkdWVhdWdueCJ9.r6DamuPvqsyrf2BE610D3Q';
+    mapboxgl.accessToken = 'pk.eyJ1IjoibnVsbGNsYXNzIiwiYSI6ImNqbjBrYnR3eTAxMHcza200c3J6dDZ6dTYifQ.SISRlcNpNBI4cI_BF2U07w';
     var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/axkatros/cjndaxcho12z62slq5a7hzg5z',
+    style: 'mapbox://styles/nullclass/cjnonj8w91fes2rtgvhhbmjtj',
     center: [-82.3473,29.6486], // starting position
     zoom: 15 // starting zoom
 });
@@ -90,7 +90,7 @@ map.on('load', function () {
     //testing clickable points
     map.on('click', function(e) {
       var features = map.queryRenderedFeatures(e.point, {
-    layers: ['null-class-v2'] // replace this with the name of the layer
+    layers: ['uf-buildings'] // replace this with the name of the layer
 });
 
       if (!features.length) {
@@ -101,18 +101,18 @@ map.on('load', function () {
 
     var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Code + '</p>')
+    .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Code + '</p>'+'<p>'+feature.properties.Address+'</p>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
 
     // Change the cursor to a pointer when the mouse is over the places layer.
-    map.on('mouseenter', 'places', function () {
+    map.on('mouseenter', 'uf-buildings', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
 
     // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'places', function () {
+    map.on('mouseleave', 'uf-buildings', function () {
         map.getCanvas().style.cursor = '';
     });
 });
