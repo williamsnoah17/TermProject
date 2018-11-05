@@ -12,18 +12,24 @@
 </head>
 <body ng-app="nullClass">
     <div class="container">
-
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="index.html">Null Space</a>
-              </div>
-              <ul class="nav navbar-nav navbar-right">
-                  <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                  <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-              </ul>
-          </div>
-      </nav>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Null Space</a>
+        </div>
+        <div id="in_div">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          </ul>
+        </div>
+        <div id="out_div">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="login.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
       <div class="row" ng-controller="ListingsController">
         <div class="col-md-7 left">
             <div id="map">
@@ -124,5 +130,19 @@ map.on('load', function () {
 <script src="js/app.js"></script>
 <script src="js/factories/listingFactory.js"></script>
 <script src="js/controllers/listingController.js"></script>
+<script src="login.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA5Y_q99pkCGe1nTez7fpZxfg8e_iHzTnY",
+    authDomain: "swegroup2-6a1a3.firebaseapp.com",
+    databaseURL: "https://swegroup2-6a1a3.firebaseio.com",
+    projectId: "swegroup2-6a1a3",
+    storageBucket: "swegroup2-6a1a3.appspot.com",
+    messagingSenderId: "856196986882"
+  };
+  firebase.initializeApp(config);
+</script>
 </body>
 </html>

@@ -45,3 +45,11 @@
 	font-weight: bolder;
 	display: inline-block;
 }
+
+#in_div {
+	display: initial;
+}
+
+#out_div {
+	display: none;
+}
