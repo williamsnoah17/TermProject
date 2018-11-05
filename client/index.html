@@ -12,47 +12,47 @@
 </head>
 <body ng-app="nullClass">
     <div class="container">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">Null Space</a>
-        </div>
-        <div id="in_div">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          </ul>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="index.html">Null Space</a>
+          </div>
+          <div id="in_div">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            </ul>
         </div>
         <div id="out_div">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="login.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
-          </ul>
+        </ul>
+    </div>
+</div>
+</nav>
+<div class="row" ng-controller="ListingsController">
+    <div class="col-md-7 left">
+        <div id="map">
         </div>
-      </div>
-    </nav>
-      <div class="row" ng-controller="ListingsController">
-        <div class="col-md-7 left">
-            <div id="map">
-            </div>
-            <div id="details">
-                <h1 class="dummyText">details</h1>
-            </div>
+        <div id="details">
+            <h1 class="dummyText">details</h1>
         </div>
-        <div class="col-md-4 right">
-            <div id="listBar">
-                <div class="input-group" id="searchBar">
-                    <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
-                    <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
-                </div>
-                <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
-                    <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
-                    <div class="classrooms{{$index}} collapse">
-                        The person who stole your laptop went into {{place.name}}.
-                    </div>
+    </div>
+    <div class="col-md-4 right">
+        <div id="listBar">
+            <div class="input-group" id="searchBar">
+                <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+                <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
+            </div>
+            <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
+                <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                <div class="classrooms{{$index}} collapse">
+                    The person who stole your laptop went into {{place.name}}.
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -130,7 +130,6 @@ map.on('load', function () {
 <script src="js/app.js"></script>
 <script src="js/factories/listingFactory.js"></script>
 <script src="js/controllers/listingController.js"></script>
-<script src="login.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -141,8 +140,9 @@ map.on('load', function () {
     projectId: "swegroup2-6a1a3",
     storageBucket: "swegroup2-6a1a3.appspot.com",
     messagingSenderId: "856196986882"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 </script>
+<script src="login.js"></script>
 </body>
 </html>
