@@ -17,7 +17,7 @@ function login() {
 	var password = document.getElementById("password_field").value;
 
 	firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-
+		document.location.href = "index.html";
 	}).catch(function(error) {
   	// Handle Errors here.
   	var errorCode = error.code;
@@ -47,7 +47,9 @@ function logout() {
   	var email = document.getElementById("new_email_field").value;
   	var password = document.getElementById("new_password_field").value;
 
-  	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  	firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
+  		logout();
+  	}).catch(function(error) {
   		// Handle Errors here.
   	var errorCode = error.code;
   	var errorMessage = error.message;
