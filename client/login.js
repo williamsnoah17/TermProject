@@ -47,6 +47,12 @@ function logout() {
   	var email = document.getElementById("new_email_field").value;
   	var password = document.getElementById("new_password_field").value;
 
+  	var indexOfAt = email.indexOf('@ufl.edu');
+  	if(indexOfAt == -1) {
+  		window.alert("Error : the email address used must be a UFL email (@ufl.edu)");
+  		return;
+  	}
+
   	firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
   		logout();
   	}).catch(function(error) {
