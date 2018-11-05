@@ -60,11 +60,20 @@
 	height: 100%;
 }
 
-.buildingButton {
+/* .buildingButton {
 	width: 100%;
 	height: 3em;
 	font-weight: bolder;
 	display: inline-block;
+	text-align: -webkit-left;
+} */
+
+.buttonsToggle {
+	width: 100%;
+	height: 3em;
+	font-weight: bolder;
+	display: inline-block;
+	text-align: -webkit-left;
 }
 
 #in_div {
