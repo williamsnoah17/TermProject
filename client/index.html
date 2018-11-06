@@ -46,8 +46,10 @@
                 <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
             </div>
             <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
-                <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
-                                <button type="button" data-toggle="modal" data-target="#myModal{{$index}}">+</button>
+              <div class="btn-group" style="width:100%">
+                <button style="width:90%" class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{$index}}">+</button>
+              </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal{{$index}}" role="dialog">
@@ -69,7 +71,7 @@
                           <input type="text" placeholder="Number of Outlets" id="password_field">
                           <br>
                           <br>
-                          Room Size: 
+                          Room Size:
                           <input type="radio" name="roomSize" value="small" checked> Small
                           <input type="radio" name="roomSize" value="medium"> Medium
                           <input type="radio" name="roomSize" value="large"> Large
@@ -112,7 +114,7 @@ map.on('load', function () {
     // Add a layer showing the places.
     //Just testing out this feature, mapped Marston with a star
     //Working on figuring out how to utilize places already marked
-    
+
     // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.
     map.on('click', 'places', function (e) {

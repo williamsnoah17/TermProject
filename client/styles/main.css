@@ -1,6 +1,7 @@
 .container {
 	margin-top: 10px;
 }
+
 #header {
 	width: 100%;
 	text-align: center;
@@ -32,14 +33,18 @@
 }
 
 .right {
-	border: 5px solid black;
+	/* border: 5px solid black; */
 	height: 820px;
 	margin-top: 20px;
-  	overflow: auto;
+  overflow: auto;
+}
+
+.input-group {
+	padding-bottom: 10px;
 }
 
 #map {
-	border: 2px solid black;
+	/* border: 2px solid black; */
 	height: 70%;
 	margin-bottom: 20px;
 }
@@ -68,23 +73,18 @@
 	text-align: -webkit-left;
 } */
 
+.btn-group {
+	display: flex;
+}
+
 .buttonsToggle {
 	width: 100%;
 }
 
 .buildingButton {
-	width: 80%;
 	height: 3em;
 	font-weight: bolder;
 	display: inline-block;
-}
-
-.addButton {
-	width: 15%;
-	height: 3em;
-	font-weight: bolder;
-	display: inline-block;
-	text-align: -webkit-left;
 }
 
 #in_div {
@@ -93,4 +93,15 @@
 
 #out_div {
 	display: none;
+}
+
+.jumbotron {
+	height: 500px;
+	background-color: aliceblue;
+}
+
+#navLogoSignIn {
+	height: 65px;
+	width: 55px;
+	margin-bottom: 25px;
 }
