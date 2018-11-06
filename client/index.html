@@ -12,6 +12,7 @@
 </head>
 <body ng-app="nullClass">
     <div class="container">
+
     <nav class="navbar navbar-light bg-light collapse navbar-collapse"id="navbarSupportedContent">
       <div class="container-fluid">
         <a class="navbar-brand" id="logoTitlePackage" href="index.html">
@@ -33,14 +34,23 @@
     </nav>
 <div class="row" ng-controller="ListingsController">
     <div class="col-md-7 left">
+
         <div id="map">
         </div>
         <div id="details">
-            <h1 class="dummyText">details</h1>
+          <h1 class="dummyText">details</h1>
         </div>
-    </div>
-    <div class="col-md-4 right">
+      </div>
+      <div class="col-md-4 right">
         <div id="listBar">
+          <div class="input-group" id="searchBar">
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
+          </div>
+          <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
+            <div class="buttonsToggle">
+              <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+              <button class="addButton">+</button>
             <div class="input-group" id="searchBar">
                 <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
                 <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
@@ -88,13 +98,14 @@
           </div>
       </div>
                 <div class="classrooms{{$index}} collapse">
-                    The person who stole your laptop went into {{place.name}}.
+                  The person who stole your laptop went into {{place.name}}.
                 </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 
 
 <script>
@@ -112,7 +123,6 @@ map.on('load', function () {
     // Add a layer showing the places.
     //Just testing out this feature, mapped Marston with a star
     //Working on figuring out how to utilize places already marked
-    
     // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.
     map.on('click', 'places', function (e) {
