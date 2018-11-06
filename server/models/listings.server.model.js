@@ -27,7 +27,8 @@ var listingSchema = new Schema({
     {
       roomNumber: {
         type: Number,
-        required: true
+        required: true,
+        unique: true 
       },
       rating: {
         likes: {

@@ -19,6 +19,56 @@
       location.reload();
     };
 
+    $scope.addClassroom = function(place) {
+      window.alert(place.code);
+
+      /*
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      TODO
+      */
+      Listing.updateOne({ name: place.name }, {classRoomArray: classRoomArray.push()}, function(err, listing) {
+        if (err) throw err;
+        Listing.findOne({ name: place.name }, function(err, listing) {
+          if (err) throw err;
+          console.log(listing);
+        });
+      });
+
+    };
+
     $scope.deleteListing = function(index) {
 
       Listings.delete($scope.listings[index]._id).then(function(response) {}, function(error) {
