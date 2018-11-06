@@ -4,6 +4,17 @@ firebase.auth().onAuthStateChanged(function(user) {
     document.getElementById("in_div").style.display = "none";
     document.getElementById("out_div").style.display = "initial";
 
+    var user = firebase.auth().currentUser;
+
+    //Dislay the name of the user logged in.
+    if(user != null) {
+
+      var email_id = user.email;
+      var email = email_id.split('@');
+
+      document.getElementById("user_id").innerHTML = "Logged in as: " + email[0];
+    }
+
 } else {
     // No user is signed in.
     document.getElementById("in_div").style.display = "initial";
