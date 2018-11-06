@@ -60,6 +60,7 @@
 	height: 100%;
 }
 
+<<<<<<< HEAD
 /* .buildingButton {
 	width: 100%;
 	height: 3em;
@@ -70,6 +71,17 @@
 
 .buttonsToggle {
 	width: 100%;
+=======
+.buildingButton {
+	width: 80%;
+	height: 3em;
+	font-weight: bolder;
+	display: inline-block;
+}
+
+.addButton {
+	width: 15%;
+>>>>>>> 78d15712a31aeef46b4deb1dc95b7a23f8c1d2e9
 	height: 3em;
 	font-weight: bolder;
 	display: inline-block;

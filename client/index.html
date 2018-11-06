@@ -41,6 +41,7 @@
       </div>
       <div class="col-md-4 right">
         <div id="listBar">
+<<<<<<< HEAD
           <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
             <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
@@ -49,6 +50,54 @@
             <div class="buttonsToggle">
               <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
               <button class="addButton">+</button>
+=======
+            <div class="input-group" id="searchBar">
+                <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+                <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
+            </div>
+            <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-click="showDetails($index)">
+                <button class="buildingButton" data-toggle="collapse" data-target=".classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                                <button type="button" data-toggle="modal" data-target="#myModal{{$index}}">+</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal{{$index}}" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Add Classroom in {{place.code}} | {{place.name}}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <br>
+                          <input type="text" placeholder="Room Number" id="email_field">
+                          <br>
+                          <br>
+                          <input type="text" placeholder="Description" id="password_field">
+                          <br>
+                          <br>
+                          <input type="text" placeholder="Number of Outlets" id="password_field">
+                          <br>
+                          <br>
+                          Room Size: 
+                          <input type="radio" name="roomSize" value="small" checked> Small
+                          <input type="radio" name="roomSize" value="medium"> Medium
+                          <input type="radio" name="roomSize" value="large"> Large
+                          <br>
+                          <br>
+                          <input type="checkbox" name="blackboard" value="blackboard"> Blackboard<br>
+                          <input type="checkbox" name="whiteboard" value="whiteboard"> Whiteboard
+                          <br><br>
+                          <button ng-click="addClassroom(place)">Add Classroom</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+>>>>>>> 78d15712a31aeef46b4deb1dc95b7a23f8c1d2e9
                 <div class="classrooms{{$index}} collapse">
                   The person who stole your laptop went into {{place.name}}.
                 </div>
@@ -69,29 +118,29 @@
     center: [-82.3473,29.6486], // starting position
     zoom: 15 // starting zoom
 });
-
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
-
 map.on('load', function () {
     // Add a layer showing the places.
     //Just testing out this feature, mapped Marston with a star
     //Working on figuring out how to utilize places already marked
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 78d15712a31aeef46b4deb1dc95b7a23f8c1d2e9
     // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.
     map.on('click', 'places', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var description = e.features[0].properties.description;
-
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
         // over the copy being pointed to.
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
-
         new mapboxgl.Popup()
         .setLngLat(coordinates)
         .setHTML(description)
@@ -102,25 +151,20 @@ map.on('load', function () {
       var features = map.queryRenderedFeatures(e.point, {
     layers: ['uf-buildings'] // replace this with the name of the layer
 });
-
       if (!features.length) {
         return;
     }
-
     var feature = features[0];
-
     var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
     .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Code + '</p>'+'<p>'+feature.properties.Address+'</p>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
-
     // Change the cursor to a pointer when the mouse is over the places layer.
     map.on('mouseenter', 'uf-buildings', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
-
     // Change it back to a pointer when it leaves.
     map.on('mouseleave', 'uf-buildings', function () {
         map.getCanvas().style.cursor = '';
