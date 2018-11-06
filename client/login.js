@@ -50,7 +50,7 @@ function logout() {
   	}
 
   	firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
-  		logout();
+  		document.location.href = "index.html";
   	}).catch(function(error) {
   		// Handle Errors here.
   	var errorCode = error.code;

@@ -6,6 +6,25 @@
 	text-align: center;
 }
 
+.navbar {
+	background-color: aliceblue;
+}
+
+#logoTitlePackage {
+    padding: 5px 5px;
+}
+
+#navTitle {
+	display: inline;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+#navLogo {
+	display: inline;
+	height: 40px;
+}
+
 .left {
 	height: 800px;
 	margin: 20px;
@@ -20,14 +39,14 @@
 }
 
 #map {
-	border: 2px solid black; 
+	border: 2px solid black;
 	height: 70%;
 	margin-bottom: 20px;
 }
 
 #details {
 	border: 2px solid blue;
-	height: 30%; 
+	height: 30%;
 	margin-bottom: 40px;
 }
 
@@ -39,6 +58,18 @@
 
 #listBar {
 	height: 100%;
+}
+
+/* .buildingButton {
+	width: 100%;
+	height: 3em;
+	font-weight: bolder;
+	display: inline-block;
+	text-align: -webkit-left;
+} */
+
+.buttonsToggle {
+	width: 100%;
 }
 
 .buildingButton {
@@ -53,6 +84,7 @@
 	height: 3em;
 	font-weight: bolder;
 	display: inline-block;
+	text-align: -webkit-left;
 }
 
 #in_div {
