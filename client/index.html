@@ -6,8 +6,8 @@
     <meta charset='utf-8' />
     <title>Null Class</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
 
 </head>
 <body ng-app="nullClass">
@@ -20,14 +20,13 @@
         </a>
         <div id="in_div">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="signup.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           </ul>
         </div>
         <div id="out_div">
           <ul class="nav navbar-nav navbar-right">
-            <li><a id="user_id"></a></li>
-            <li><a href="signup.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+            <li><a href="login.html" onClick="logout()"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
           </ul>
         </div>
       </div>
@@ -103,11 +102,18 @@
 <script>
     //Initialize map
     mapboxgl.accessToken = 'pk.eyJ1IjoibnVsbGNsYXNzIiwiYSI6ImNqbjBrYnR3eTAxMHcza200c3J6dDZ6dTYifQ.SISRlcNpNBI4cI_BF2U07w';
+
+    var bounds = [
+    [-82.372578, 29.627101], // Southwest coordinates
+    [-82.337135, 29.654167]  // Northeast coordinates
+    ];
+
     var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/nullclass/cjnonj8w91fes2rtgvhhbmjtj',
     center: [-82.3473,29.6486], // starting position
-    zoom: 15 // starting zoom
+    zoom: 15, // starting zoom
+    maxBounds : bounds
 });
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
@@ -132,8 +138,7 @@ map.on('load', function () {
         .setHTML(description)
         .addTo(map);
     });
-    //===================================================================
-    //clickable points that pop up detailed info
+    //testing clickable points
     map.on('click', function(e) {
       var features = map.queryRenderedFeatures(e.point, {
     layers: ['uf-buildings'] // replace this with the name of the layer
@@ -142,19 +147,12 @@ map.on('load', function () {
         return;
     }
     var feature = features[0];
-        //flies to a point when clicked
-        map.flyTo({
-        center: [
-            (feature.geometry.coordinates[0]),feature.geometry.coordinates[1]]
-    });
-        
     var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
     .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Code + '</p>'+'<p>'+feature.properties.Address+'</p>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
-    //=================================================================
     // Change the cursor to a pointer when the mouse is over the places layer.
     map.on('mouseenter', 'uf-buildings', function () {
         map.getCanvas().style.cursor = 'pointer';
