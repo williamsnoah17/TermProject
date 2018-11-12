@@ -1,5 +1,7 @@
   angular.module('listings').controller('ListingsController', ['$scope', 'Listings', 
     function($scope, Listings) {
+      $scope.roomInfo = {};
+      $scope.roomInfo.roomSize = "Small";
       /* Get all the listings, then bind it to the scope */
       Listings.getAll().then(function(response) {
         $scope.listings = response.data;
@@ -19,54 +21,17 @@
       location.reload();
     };
 
-    $scope.addClassroom = function(place) {
+    $scope.addClassroom = function(index, place) {
+      
       window.alert(place.code);
+      console.log($scope.roomInfo);
 
-      /*
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      TODO
-      */
-      Listing.updateOne({ name: place.name }, {classRoomArray: classRoomArray.push()}, function(err, listing) {
-        if (err) throw err;
-        Listing.findOne({ name: place.name }, function(err, listing) {
-          if (err) throw err;
-          console.log(listing);
-        });
+      const roomInfo = $scope.roomInfo;
+      Listings.update($scope.listings[index]._id, roomInfo).then(function(response) {}, function(error) {
+         console.log('Unable to delete listing:', error);
       });
-
+      $scope.roomInfo = {}; //Clear the scope afterwards.
+      $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
     };
 
     $scope.deleteListing = function(index) {

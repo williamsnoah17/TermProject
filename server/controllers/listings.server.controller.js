@@ -55,6 +55,14 @@ exports.update = function(req, res) {
             }
           }
     );
+
+    // Listing.updateOne({ name: place.name }, {classRoomArray: classRoomArray.push()}, function(err, listing) {
+    //   if (err) throw err;
+    //   Listing.findOne({ name: place.name }, function(err, listing) {
+    //     if (err) throw err;
+    //     console.log(listing);
+    //   });
+    // });
 };
 
 /* Delete a listing */

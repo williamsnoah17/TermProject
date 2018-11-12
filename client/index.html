@@ -62,25 +62,25 @@
                       <div class="modal-body">
                         <form>
                           <br>
-                          <input type="text" placeholder="Room Number" id="email_field">
+                          <input type="number" placeholder="Room Number" ng-model="roomInfo.roomNumber">
                           <br>
                           <br>
-                          <input type="text" placeholder="Description" id="password_field">
+                          <input type="text" placeholder="Description" ng-model="roomInfo.description">
                           <br>
                           <br>
-                          <input type="text" placeholder="Number of Outlets" id="password_field">
+                          <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets">
                           <br>
                           <br>
                           Room Size:
-                          <input type="radio" name="roomSize" value="small" checked> Small
-                          <input type="radio" name="roomSize" value="medium"> Medium
-                          <input type="radio" name="roomSize" value="large"> Large
+                          <input type="radio" ng-model="roomInfo.roomSize" value="Small" checked> Small
+                          <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
+                          <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
                           <br>
                           <br>
-                          <input type="checkbox" name="blackboard" value="blackboard"> Blackboard<br>
-                          <input type="checkbox" name="whiteboard" value="whiteboard"> Whiteboard
+                          <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard"> Blackboard<br>
+                          <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard"> Whiteboard
                           <br><br>
-                          <button ng-click="addClassroom(place)">Add Classroom</button>
+                          <button ng-click="addClassroom($index, place)">Add Classroom</button>
                       </form>
                   </div>
                   <div class="modal-footer">
