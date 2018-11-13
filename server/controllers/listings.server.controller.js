@@ -46,7 +46,8 @@ exports.update = function(req, res) {
      {name: req.body.name,
       code: req.body.code,
        coordinates: req.body.coordinates,
-         address: req.body.address}, {new: true}, (err, doc) => {
+         address: req.body.address,
+          classRoomArray: req.body.classRoomArray}, {new: true}, (err, doc) => {
             if (err) {
                res.status(404).send(err);
             }
