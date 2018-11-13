@@ -147,6 +147,14 @@ map.on('load', function () {
         return;
     }
     var feature = features[0];
+        
+        //fly-to feature
+         map.flyTo({
+        center: [
+            (feature.geometry.coordinates[0]),feature.geometry.coordinates[1]]
+    });
+        
+        
     var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
     .setHTML('<h3>' + feature.properties.Name + '</h3><p>' + feature.properties.Code + '</p>'+'<p>'+feature.properties.Address+'</p>')
