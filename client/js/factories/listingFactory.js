@@ -7,13 +7,12 @@ angular.module('listings', []).factory('Listings', function($http) {
   create: function(listing) {
     return $http.post('http://localhost:8080/api/listings', listing);
     },
-     
-    //Not sure how to build this function to update the listings.
-    // update : function(id) {
-    //   return $http.put(`http://localhost:8080/api/listings/${id}`);
-    // },
     
-     delete: function(id) {
+  update : function(id, listing) {
+      return $http.put(`http://localhost:8080/api/listings/${id}`, listing);
+    },
+    
+  delete: function(id) {
     return $http.delete(`http://localhost:8080/api/listings/${id}`);
     }
   };

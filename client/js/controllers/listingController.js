@@ -24,12 +24,15 @@
     $scope.addClassroom = function(index, place) {
       
       window.alert(place.code);
-      console.log($scope.roomInfo);
-
       const roomInfo = $scope.roomInfo;
-      Listings.update($scope.listings[index]._id, roomInfo).then(function(response) {}, function(error) {
-         console.log('Unable to delete listing:', error);
+
+      console.log(roomInfo);
+      $scope.listings[index].classRoomArray.push(roomInfo);
+
+      Listings.update($scope.listings[index]._id, $scope.listings[index]).then(function(response) {}, function(error) {
+         console.log('Unable to update listing:', error);
       });
+
       $scope.roomInfo = {}; //Clear the scope afterwards.
       $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
     };
