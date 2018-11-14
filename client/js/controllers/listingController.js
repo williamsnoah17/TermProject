@@ -1,9 +1,11 @@
   angular.module('listings').controller('ListingsController', ['$scope', 'Listings', 
     function($scope, Listings) {
+      $scope.detailedInfo = {};
       $scope.roomInfo = {};
       $scope.roomInfo.roomSize = "Small";
       $scope.roomInfo.blackboard = false;
       $scope.roomInfo.whiteboard = false;
+      $scope.roomInfo.occupied = false;
       /* Get all the listings, then bind it to the scope */
       Listings.getAll().then(function(response) {
         $scope.listings = response.data;
@@ -11,7 +13,6 @@
         console.log('Unable to retrieve listings:', error);
       });
 
-      $scope.detailedInfo = undefined;
 
       $scope.addListing = function() {
 
@@ -75,8 +76,12 @@
       location.reload();
     };
 
-    $scope.showDetails = function(index) {
-      $scope.detailedInfo = $scope.listings[index];
+    $scope.showDetails = function(place, index) {
+      console.log(place);
+      $scope.detailedInfo = {code: place.code, 
+        name: place.name,
+        classroom : place.classRoomArray[index]};
+      console.log($scope.detailedInfo);
     };
 
     $scope.searchFilterCustom = function(entry) {

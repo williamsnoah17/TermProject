@@ -51,14 +51,12 @@
 
 #details {
 	border: 2px solid blue;
-	height: 30%;
+	height: 35%;
 	margin-bottom: 40px;
 }
 
 .dummyText {
-	text-align: center;
-	height: 50%;
-	padding-top: 30px;
+	text-align: left;
 }
 
 #listBar {
