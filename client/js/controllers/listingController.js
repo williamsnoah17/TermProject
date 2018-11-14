@@ -5,7 +5,7 @@
       $scope.roomInfo.roomSize = "Small";
       $scope.roomInfo.blackboard = false;
       $scope.roomInfo.whiteboard = false;
-      $scope.roomInfo.occupied = false;
+      $scope.roomInfo.isOccupied = false;
       /* Get all the listings, then bind it to the scope */
       Listings.getAll().then(function(response) {
         $scope.listings = response.data;
@@ -31,10 +31,6 @@
 
       for(var i = 0; i < $scope.listings[index].classRoomArray.length; i++) {
         if($scope.listings[index].classRoomArray[i].roomNumber == roomInfo.roomNumber) {
-          $scope.roomInfo = {}; //Clear the scope afterwards.
-          $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
-          $scope.roomInfo.blackboard = false;
-          $scope.roomInfo.whiteboard = false;
           duplicateRoom = true;
           break;
         }
@@ -46,6 +42,7 @@
         $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
         $scope.roomInfo.blackboard = false;
         $scope.roomInfo.whiteboard = false;
+        $scope.roomInfo.isOccupied = false;
         return;
       }
       else {
@@ -60,9 +57,10 @@
       $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
       $scope.roomInfo.blackboard = false;
       $scope.roomInfo.whiteboard = false;
+      $scope.roomInfo.isOccupied = false;
 
 
-      window.alert("A new room has been added to: " + place.code);
+      window.alert("A new room has been added to : " + place.code);
       }
   
     };
@@ -98,5 +96,27 @@
        }
      }
    };   
+
+   $scope.toggleOccupied = function(placeIndex, classIndex, place) {
+   
+    console.log(placeIndex);
+     const isOccupied = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
+
+    console.log($scope.listings[placeIndex]);
+     console.log($scope.listings[placeIndex].classRoomArray[classIndex]);
+     console.log(isOccupied);
+
+    if(isOccupied) {
+      $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = false;
+    }
+    else {
+      $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = true;
+    }
+
+    Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function(response) {}, function(error) {
+       console.log('Unable to update listing:', error);
+    });
+    }
+
  }
  ]);
