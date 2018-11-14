@@ -40,12 +40,29 @@ var listingSchema = new Schema({
           default: 0
         }
       },
-    description: String, 
-    isOccupied: Boolean,
-    size: Number,
-    outlets: Number,
-    hasWhiteboard: Boolean,
-    hasBlackboard: Boolean
+      description: {
+        type: String,
+        required: true,
+      },
+      isOccupied: {
+        type: Boolean,
+      },
+      roomSize: {
+        type: String,
+        required: true,
+      },
+      blackboard: {
+        type: Boolean,
+        required: true,
+      },
+      whiteboard: {
+        type: Boolean,
+        required: true,
+      },
+      outlets: {
+        type: Number,
+        required: true,
+      }
   }],
   created_at: Date,
   updated_at: Date

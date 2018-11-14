@@ -11,7 +11,7 @@
 
 </head>
 <body ng-app="nullClass">
-    <div class="container">
+    <div class="container" ng-controller="ListingsController">
     <nav class="navbar navbar-light bg-light collapse navbar-collapse"id="navbarSupportedContent">
       <div class="container-fluid">
         <a class="navbar-brand" id="logoTitlePackage" href="index.html">
@@ -32,7 +32,7 @@
         </div>
       </div>
     </nav>
-<div class="row" ng-controller="ListingsController">
+<div class="row">
     <div class="col-md-7 left">
         <div id="map">
         </div>
@@ -90,8 +90,9 @@
               </div>
           </div>
       </div>
-                <div class="classrooms{{$index}} collapse">
-                    The person who stole your laptop went into {{place.name}}.
+                <div class="classrooms{{$index}} btn-group collapse" ng-repeat="classroom in place.classRoomArray">
+                        <button style="width:90%" class="buildingButton" id="classNum{{$index}}">{{place.code}}{{classroom.roomNumber}}</button>
+                </div>
                 </div>
             </div>
         </div>

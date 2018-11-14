@@ -2,6 +2,8 @@
     function($scope, Listings) {
       $scope.roomInfo = {};
       $scope.roomInfo.roomSize = "Small";
+      $scope.roomInfo.blackboard = false;
+      $scope.roomInfo.whiteboard = false;
       /* Get all the listings, then bind it to the scope */
       Listings.getAll().then(function(response) {
         $scope.listings = response.data;
@@ -23,7 +25,7 @@
 
     $scope.addClassroom = function(index, place) {
       
-      window.alert(place.code);
+      window.alert("A new room has been added to: " + place.code);
       const roomInfo = $scope.roomInfo;
 
       console.log(roomInfo);
@@ -35,6 +37,10 @@
 
       $scope.roomInfo = {}; //Clear the scope afterwards.
       $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
+      $scope.roomInfo.blackboard = false;
+      $scope.roomInfo.whiteboard = false;
+
+      location.reload();
     };
 
     $scope.deleteListing = function(index) {
@@ -63,6 +69,6 @@
          return entry;
        }
      }
-   };
+   };   
  }
  ]);

@@ -12,13 +12,13 @@ firebase.auth().onAuthStateChanged(function(user) {
       var email_id = user.email;
       var email = email_id.split('@');
 
-      document.getElementById("user_id").innerHTML = "Logged in as: " + email[0];
+	  document.getElementById("user_id").innerHTML = "Logged in as: " + email[0];
     }
 
 } else {
     // No user is signed in.
     document.getElementById("in_div").style.display = "initial";
-    document.getElementById("out_div").style.display = "none";
+	document.getElementById("out_div").style.display = "none";
 }
 });
 
