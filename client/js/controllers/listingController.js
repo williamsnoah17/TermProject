@@ -108,6 +108,7 @@
 
     if(isOccupied) {
       $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = false;
+
     }
     else {
       $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = true;
@@ -116,7 +117,14 @@
     Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function(response) {}, function(error) {
        console.log('Unable to update listing:', error);
     });
+    const afterToggle = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
+    if(afterToggle) {
+      document.getElementById("occupiedButton" + classIndex).style.backgroundColor = "red";
     }
-
+    else {
+      document.getElementById("occupiedButton" + classIndex).style.backgroundColor = "green";
+    }
+    }
+   
  }
  ]);
