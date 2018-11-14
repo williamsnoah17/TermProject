@@ -25,9 +25,29 @@
 
     $scope.addClassroom = function(index, place) {
       
-      window.alert("A new room has been added to: " + place.code);
       const roomInfo = $scope.roomInfo;
+      var duplicateRoom = false;
 
+      for(var i = 0; i < $scope.listings[index].classRoomArray.length; i++) {
+        if($scope.listings[index].classRoomArray[i].roomNumber == roomInfo.roomNumber) {
+          $scope.roomInfo = {}; //Clear the scope afterwards.
+          $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
+          $scope.roomInfo.blackboard = false;
+          $scope.roomInfo.whiteboard = false;
+          duplicateRoom = true;
+          break;
+        }
+      }
+
+      if(duplicateRoom) {
+        window.alert("Cannot add duplicate room number!");
+        $scope.roomInfo = {}; //Clear the scope afterwards.
+        $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
+        $scope.roomInfo.blackboard = false;
+        $scope.roomInfo.whiteboard = false;
+        return;
+      }
+      else {
       console.log(roomInfo);
       $scope.listings[index].classRoomArray.push(roomInfo);
 
@@ -40,7 +60,10 @@
       $scope.roomInfo.blackboard = false;
       $scope.roomInfo.whiteboard = false;
 
-      location.reload();
+
+      window.alert("A new room has been added to: " + place.code);
+      }
+  
     };
 
     $scope.deleteListing = function(index) {
