@@ -56,9 +56,7 @@
             </div>
             <div ng-repeat="place in listings | filter: searchFilterCustom(place)">
               <div class="btn-group" style="width:100%">
-                <button style="width:7%" class="buildingButton like" id="likeButton{{$index}}">:)</button>
-                <button style="width:7%" class="buildingButton dislike" id="dislikeButton{{$index}}">:|</button>
-                <button style="width:76%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                <button style="width:90%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
                 <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{$index}}">+</button>
               </div>
 
@@ -102,7 +100,9 @@
       </div>
                 <div id="classrooms{{$index}}" class="collapse" >
                     <div class="btn-group" ng-repeat="classroom in place.classRoomArray">
-                            <button style="width:90%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-click="toggleOccupied($parent.$index, $index, place)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
+                            <button style="width:8%" class="buildingButton like" id="likeButton{{$parent.$index}}{{$index}}" ng-click="hitLike($parent.$index, $index)">:)</button>
+                            <button style="width:8%" class="buildingButton dislike" id="dislikeButton{{$parent.$index}}{{$index}}" ng-click="hitDislike($parent.$index, $index)">:|</button>
+                            <button style="width:75%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-click="toggleOccupied($parent.$index, $index, place)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
                     </div>
                         
                     </div>

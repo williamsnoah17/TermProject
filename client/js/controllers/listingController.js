@@ -124,7 +124,25 @@
     else {
       document.getElementById("occupiedButton" + placeIndex + "" + classIndex).style.backgroundColor = "green";
     }
-    }
+    };
+
+    $scope.hitLike = function(placeIndex, classIndex) {
+
+        $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes++;
+
+      Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function(response) {}, function(error) {
+         console.log('Unable to update listing:', error);
+      });
+      };
+
+      $scope.hitDislike = function(placeIndex, classIndex) {
+
+        $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes++;
+
+      Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function(response) {}, function(error) {
+         console.log('Unable to update listing:', error);
+      });
+      };
    
  }
  ]);
