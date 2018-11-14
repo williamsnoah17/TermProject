@@ -119,10 +119,10 @@
     });
     const afterToggle = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
     if(afterToggle) {
-      document.getElementById("occupiedButton" + classIndex).style.backgroundColor = "red";
+      document.getElementById("occupiedButton" + placeIndex + "" + classIndex).style.backgroundColor = "red";
     }
     else {
-      document.getElementById("occupiedButton" + classIndex).style.backgroundColor = "green";
+      document.getElementById("occupiedButton" + placeIndex + "" + classIndex).style.backgroundColor = "green";
     }
     }
    

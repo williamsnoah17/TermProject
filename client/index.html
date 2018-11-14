@@ -100,7 +100,7 @@
       </div>
                 <div id="classrooms{{$index}}" class="collapse" >
                     <div class="btn-group" ng-repeat="classroom in place.classRoomArray">
-                            <button style="width:90%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-click="toggleOccupied($parent.$index, $index, place)" id="occupiedButton{{$index}}"></button></button>
+                            <button style="width:90%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-click="toggleOccupied($parent.$index, $index, place)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
                     </div>
                         
                     </div>
