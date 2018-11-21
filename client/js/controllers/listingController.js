@@ -28,45 +28,53 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
     //Adding a classroom
     $scope.addClassroom = function (index, place) {
-      var roomInfo = $scope.roomInfo;
-      var duplicateRoom = false;
 
-      //Check if the room number already exists.
-      for (var i = 0; i < $scope.listings[index].classRoomArray.length; i++) {
-        if ($scope.listings[index].classRoomArray[i].roomNumber == roomInfo.roomNumber) {
-          duplicateRoom = true;
-          break;
+      var user = firebase.auth().currentUser;
+      if(user != null) {
+        var roomInfo = $scope.roomInfo;
+        var duplicateRoom = false;
+  
+        //Check if the room number already exists.
+        for (var i = 0; i < $scope.listings[index].classRoomArray.length; i++) {
+          if ($scope.listings[index].classRoomArray[i].roomNumber == roomInfo.roomNumber) {
+            duplicateRoom = true;
+            break;
+          }
         }
+  
+        //If it exists, reset the request and return.
+        if (duplicateRoom) {
+          window.alert("Cannot add duplicate room number!");
+          $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
+          $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
+          $scope.roomInfo.blackboard = false;
+          $scope.roomInfo.whiteboard = false;
+          $scope.roomInfo.isOccupied = false;
+          return;
+        }
+        //Otherwise add the classroom the building's classroom array.
+        else {
+          $scope.listings[index].classRoomArray.push(roomInfo);
+  
+          Listings.update($scope.listings[index]._id, $scope.listings[index]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });
+  
+          $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
+          $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
+          $scope.roomInfo.blackboard = false;
+          $scope.roomInfo.whiteboard = false;
+          $scope.roomInfo.isOccupied = false;
+  
+          window.alert("A new room has been added to : " + place.code);
+        }
+        location.reload();
       }
-
-      //If it exists, reset the request and return.
-      if (duplicateRoom) {
-        window.alert("Cannot add duplicate room number!");
-        $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
-        $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
-        $scope.roomInfo.blackboard = false;
-        $scope.roomInfo.whiteboard = false;
-        $scope.roomInfo.isOccupied = false;
+      else {
+        window.alert("You must be logged in to create a new classroom!");
+        location.reload();
         return;
       }
-      //Otherwise add the classroom the building's classroom array.
-      else {
-        $scope.listings[index].classRoomArray.push(roomInfo);
-
-        Listings.update($scope.listings[index]._id, $scope.listings[index]).then(function (response) { }, function (error) {
-          console.log('Unable to update listing:', error);
-        });
-
-        $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
-        $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
-        $scope.roomInfo.blackboard = false;
-        $scope.roomInfo.whiteboard = false;
-        $scope.roomInfo.isOccupied = false;
-
-        window.alert("A new room has been added to : " + place.code);
-      }
-      location.reload();
-
     };
     
     //Erases a function at a given index.
@@ -124,21 +132,29 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     //Toggles the occupancy of the classroom.
     $scope.toggleOccupied = function (placeIndex, classIndex) {
 
-      const isOccupied = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
+      var user = firebase.auth().currentUser;
+      //Dislay the name of the user logged in.
+      if(user != null) {
+        const isOccupied = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
       
-      //Toggles the occupancy.
-      if (isOccupied) {
-        $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = false;
-
+        //Toggles the occupancy.
+        if (isOccupied) {
+          $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = false;
+  
+        }
+        else {
+          $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = true;
+        }
+  
+        //Update the database.
+        Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+          console.log('Unable to update listing:', error);
+        });
       }
       else {
-        $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = true;
+        window.alert("You must be logged in to use this feature!");
       }
 
-      //Update the database.
-      Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
-        console.log('Unable to update listing:', error);
-      });
       //Display details
       $scope.showDetails($scope.listings[placeIndex], classIndex);
     };
@@ -212,6 +228,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       }
       //If no one is logged in then you cannot like.
       else {
+        window.alert("You must be logged in to rate a classroom!");
         return;
       }
     };
@@ -290,6 +307,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       }
       //If no one is logged in then you cannot dislike.
       else {
+        window.alert("You must be logged in to rate a classroom!");
         return;
       }
     };
