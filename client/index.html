@@ -187,13 +187,25 @@ map.on('load', function () {
 });
 </script>
 
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<!-- Bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+<!-- AngularJS -->
 <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+
+<!-- Access to Angular App -->>
 <script src="js/app.js"></script>
+
+<!-- Listing Factory & Controller-->
 <script src="js/factories/listingFactory.js"></script>
 <script src="js/controllers/listingController.js"></script>
+
+<!-- Firebase & AngularFire-->
 <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -206,6 +218,8 @@ map.on('load', function () {
 };
 firebase.initializeApp(config);
 </script>
+
+<!-- Handle Logins w/ Firebase-->
 <script src="login.js"></script>
 </body>
 </html>
