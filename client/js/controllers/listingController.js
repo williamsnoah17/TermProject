@@ -139,50 +139,153 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       });
     };
 
-
-    //WIP
+    //What happens when the user hits the like button
     $scope.hitLike = function (placeIndex, classIndex) {
 
       //Get user variable.
       var user = firebase.auth().currentUser;
-
       //Dislay the name of the user logged in.
       if(user != null) {
-        
+        var hasLiked = false;
+        var hasDisliked = false;
+        const email = user.email;
+
+        //Check if the user has liked the post.
+        var likedIndex = 0;
+        for (likedIndex = 0; likedIndex < $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.length; likedIndex++) {
+          if ($scope.listings[placeIndex].classRoomArray[classIndex].likedBy[likedIndex] == email) {
+            hasLiked = true;
+            break;
+          }
+        }
+        //Check if they have disliked the post.
+        var dislikedIndex = 0;
+        for (dislikedIndex = 0; dislikedIndex < $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.length; dislikedIndex++) {
+          if ($scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy[dislikedIndex] == email) {
+            hasDisliked = true;
+            break;
+          }
+        }
+
+        //Error
+        if(hasDisliked && hasLiked) {
+          window.alert("Error : cannot have both liked and disliked a post.");
+          return;
+        }
+        //If they have previously liked the post, then unlike it.
+        else if(hasLiked) {
+          //Lower the like count by 1 and remove the liker.
+          $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.splice(likedIndex, 1);
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes = $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.length;
+
+          Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });
+        }
+        else if(hasDisliked) {
+          //Lower the dislike count by 1, remove from the dislike list
+          $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.splice(dislikedIndex, 1);
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes = $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.length;
+
+          //Increment the like count by 1, add to the like list
+          $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.push(email);
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes = $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.length;          
+          
+          Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });          
+        }
+        else {
+          //Increment the like count by 1, add to the like list
+          $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.push(email);    
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes = $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.length;      
+          
+          Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });  
+        }  
       }
       //If no one is logged in then you cannot like.
       else {
         return;
       }
-
-      $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes++;
-
-      Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
-        console.log('Unable to update listing:', error);
-      });
     };
 
 
-    //WIP
+    //When user hits the dislike button
     $scope.hitDislike = function (placeIndex, classIndex) {
 
       //Get user variable.
       var user = firebase.auth().currentUser;
-
       //Dislay the name of the user logged in.
       if(user != null) {
-        
+        var hasLiked = false;
+        var hasDisliked = false;
+        const email = user.email;
+
+        //Check if the user has liked the post.
+        var likedIndex = 0;
+        for (likedIndex = 0; likedIndex < $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.length; likedIndex++) {
+          if ($scope.listings[placeIndex].classRoomArray[classIndex].likedBy[likedIndex] == email) {
+            hasLiked = true;
+            break;
+          }
+        }
+        //Check if they have disliked the post.
+        var dislikedIndex = 0;
+        for (dislikedIndex = 0; dislikedIndex < $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.length; dislikedIndex++) {
+          if ($scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy[dislikedIndex] == email) {
+            hasDisliked = true;
+            break;
+          }
+        }
+
+        //Error
+        if(hasDisliked && hasLiked) {
+          return;
+        }
+        //If they have previously disliked the post, then undislike it.
+        else if(hasDisliked) {
+
+          //Lower the dislike count by 1 and remove the disliker.
+          $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.splice(dislikedIndex, 1);
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes = $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.length;
+
+          Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });
+
+        }
+        //Has previously liked the classroom
+        else if(hasLiked) {
+          //Lower the like count by 1, remove from the like list
+          $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.splice(likedIndex, 1);
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes = $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.length;
+
+          //Increment the like count by 1, add to the like list
+          $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.push(email);
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes = $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.length;          
+          
+          Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });
+          
+        }
+        //Neither liked nor disliked
+        else {
+          //Increment the dislike count by 1, add to the dislike list
+          $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.push(email);   
+          $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes = $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.length;       
+          
+          Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });   
+        }  
       }
       //If no one is logged in then you cannot dislike.
       else {
         return;
       }
-
-      $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes++;
-
-      Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
-        console.log('Unable to update listing:', error);
-      });
     };
 
   }

@@ -40,6 +40,18 @@ var listingSchema = new Schema({
           default: 0
         }
       },
+      likedBy: {
+        type: Array,
+        contrains: {
+          type: String
+        }
+      },
+      dislikedBy: {
+        type: Array,
+        contrains: {
+          type: String
+        }
+      },
       description: {
         type: String,
         required: true,
