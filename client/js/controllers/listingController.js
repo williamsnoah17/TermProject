@@ -13,7 +13,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       console.log('Unable to retrieve listings:', error);
     });
 
-
+    //Creates a new building - unused function
     $scope.addListing = function () {
 
       Listings.create($scope.newListing).then(function (response) { }, function (error) {
@@ -24,11 +24,13 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       location.reload();
     };
 
+    //Adding a classroom
     $scope.addClassroom = function (index, place) {
 
       const roomInfo = $scope.roomInfo;
       var duplicateRoom = false;
 
+      //Check if the room number already exists.
       for (var i = 0; i < $scope.listings[index].classRoomArray.length; i++) {
         if ($scope.listings[index].classRoomArray[i].roomNumber == roomInfo.roomNumber) {
           duplicateRoom = true;
@@ -36,6 +38,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         }
       }
 
+      //If it exists, reset the request and return.
       if (duplicateRoom) {
         window.alert("Cannot add duplicate room number!");
         $scope.roomInfo = {}; //Clear the scope afterwards.
@@ -45,8 +48,8 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         $scope.roomInfo.isOccupied = false;
         return;
       }
+      //Otherwise add the classroom the building's classroom array.
       else {
-        console.log(roomInfo);
         $scope.listings[index].classRoomArray.push(roomInfo);
 
         Listings.update($scope.listings[index]._id, $scope.listings[index]).then(function (response) { }, function (error) {
@@ -59,12 +62,12 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         $scope.roomInfo.whiteboard = false;
         $scope.roomInfo.isOccupied = false;
 
-
         window.alert("A new room has been added to : " + place.code);
       }
 
     };
-
+    
+    //Erases a function at a given index.
     $scope.deleteListing = function (index) {
 
       Listings.delete($scope.listings[index]._id).then(function (response) { }, function (error) {
@@ -74,38 +77,41 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       location.reload();
     };
 
+    //Puts the information we need into the scope variable to be displayed.
     $scope.showDetails = function (place, index) {
-      console.log(place);
       $scope.detailedInfo = {
         code: place.code,
         name: place.name,
         classroom: place.classRoomArray[index]
       };
-      console.log($scope.detailedInfo);
     };
 
+    //Search for classrooms in the search bar.
     $scope.searchFilterCustom = function (entry) {
 
       return function (entry) {
         if (typeof $scope.filterText == 'undefined') {
           return entry;
         }
-
+        //Case insensitive
         if (entry.code.toLowerCase().includes($scope.filterText.toLowerCase()) || entry.name.toLowerCase().includes($scope.filterText.toLowerCase())) {
           return entry;
         }
       }
     };
 
+    //Handles the style of the occupied button.
     $scope.loadOccupied = function (placeIndex, classIndex) {
 
       const isOccupied = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
 
+      //Occupied
       if (isOccupied) {
         return {
             "background-color": 'red'
         }
       }
+      //Empty
       else {
         return {
           "background-color": 'green'
@@ -113,15 +119,12 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       }
     };
 
+    //Toggles the occupancy of the classroom.
     $scope.toggleOccupied = function (placeIndex, classIndex) {
 
-      console.log(placeIndex);
       const isOccupied = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
-
-      console.log($scope.listings[placeIndex]);
-      console.log($scope.listings[placeIndex].classRoomArray[classIndex]);
-      console.log(isOccupied);
-
+      
+      //Toggles the occupancy.
       if (isOccupied) {
         $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = false;
 
@@ -130,18 +133,14 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied = true;
       }
 
+      //Update the database.
       Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
         console.log('Unable to update listing:', error);
       });
-      const afterToggle = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
-      if (afterToggle) {
-        document.getElementById("occupiedButton" + placeIndex + "" + classIndex).style.backgroundColor = "red";
-      }
-      else {
-        document.getElementById("occupiedButton" + placeIndex + "" + classIndex).style.backgroundColor = "green";
-      }
     };
 
+
+    //WIP
     $scope.hitLike = function (placeIndex, classIndex) {
 
       $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes++;
@@ -151,6 +150,8 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       });
     };
 
+
+    //WIP
     $scope.hitDislike = function (placeIndex, classIndex) {
 
       $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes++;
