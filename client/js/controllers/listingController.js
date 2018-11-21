@@ -1,11 +1,13 @@
 angular.module('listings').controller('ListingsController', ['$scope', 'Listings',
   function ($scope, Listings) {
     $scope.detailedInfo = {};
-    $scope.roomInfo = {};
+    $scope.roomInfo = {rating: {}};
     $scope.roomInfo.roomSize = "Small";
     $scope.roomInfo.blackboard = false;
     $scope.roomInfo.whiteboard = false;
     $scope.roomInfo.isOccupied = false;
+    $scope.roomInfo.rating.likes = 0;
+    $scope.roomInfo.rating.dislikes = 0;
     /* Get all the listings, then bind it to the scope */
     Listings.getAll().then(function (response) {
       $scope.listings = response.data;
@@ -26,8 +28,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
     //Adding a classroom
     $scope.addClassroom = function (index, place) {
-
-      const roomInfo = $scope.roomInfo;
+      var roomInfo = $scope.roomInfo;
       var duplicateRoom = false;
 
       //Check if the room number already exists.
@@ -41,7 +42,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       //If it exists, reset the request and return.
       if (duplicateRoom) {
         window.alert("Cannot add duplicate room number!");
-        $scope.roomInfo = {}; //Clear the scope afterwards.
+        $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
         $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
         $scope.roomInfo.blackboard = false;
         $scope.roomInfo.whiteboard = false;
@@ -56,7 +57,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
           console.log('Unable to update listing:', error);
         });
 
-        $scope.roomInfo = {}; //Clear the scope afterwards.
+        $scope.roomInfo = {rating: {}}; //Clear the scope afterwards.
         $scope.roomInfo.roomSize = "Small"; //And set the small box to be checked.
         $scope.roomInfo.blackboard = false;
         $scope.roomInfo.whiteboard = false;
@@ -64,6 +65,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
         window.alert("A new room has been added to : " + place.code);
       }
+      location.reload();
 
     };
     
@@ -137,11 +139,14 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
         console.log('Unable to update listing:', error);
       });
+      //Display details
+      $scope.showDetails($scope.listings[placeIndex], classIndex);
     };
 
     //What happens when the user hits the like button
     $scope.hitLike = function (placeIndex, classIndex) {
-
+      //Display details
+      $scope.showDetails($scope.listings[placeIndex], classIndex);
       //Get user variable.
       var user = firebase.auth().currentUser;
       //Dislay the name of the user logged in.
@@ -214,7 +219,8 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
     //When user hits the dislike button
     $scope.hitDislike = function (placeIndex, classIndex) {
-
+      //Display details
+      $scope.showDetails($scope.listings[placeIndex], classIndex);
       //Get user variable.
       var user = firebase.auth().currentUser;
       //Dislay the name of the user logged in.
