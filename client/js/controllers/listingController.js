@@ -143,6 +143,18 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     //WIP
     $scope.hitLike = function (placeIndex, classIndex) {
 
+      //Get user variable.
+      var user = firebase.auth().currentUser;
+
+      //Dislay the name of the user logged in.
+      if(user != null) {
+        
+      }
+      //If no one is logged in then you cannot like.
+      else {
+        return;
+      }
+
       $scope.listings[placeIndex].classRoomArray[classIndex].rating.likes++;
 
       Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
@@ -153,6 +165,18 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
     //WIP
     $scope.hitDislike = function (placeIndex, classIndex) {
+
+      //Get user variable.
+      var user = firebase.auth().currentUser;
+
+      //Dislay the name of the user logged in.
+      if(user != null) {
+        
+      }
+      //If no one is logged in then you cannot dislike.
+      else {
+        return;
+      }
 
       $scope.listings[placeIndex].classRoomArray[classIndex].rating.dislikes++;
 

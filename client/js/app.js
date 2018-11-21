@@ -1,5 +1,5 @@
 /* register the modules the application depends upon here*/
-angular.module('listings', []);
+angular.module('listings', ['firebase']);
 
 /* register the application and inject all the necessary dependencies */
-var app = angular.module('nullClass', ['listings']);
+var app = angular.module('nullClass', ['listings', 'firebase']);
