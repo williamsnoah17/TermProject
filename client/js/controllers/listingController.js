@@ -102,7 +102,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       const isOccupied = $scope.listings[placeIndex].classRoomArray[classIndex].isOccupied;
 
       if (isOccupied) {
-        window.alert($scope.listings[placeIndex].code + "" + $scope.listings[placeIndex].classRoomArray[classIndex].roomNumber);
         return {
             "background-color": 'red'
         }
