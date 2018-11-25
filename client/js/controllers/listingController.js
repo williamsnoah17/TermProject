@@ -66,9 +66,11 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
           $scope.roomInfo.blackboard = false;
           $scope.roomInfo.whiteboard = false;
           $scope.roomInfo.isOccupied = false;
-  
+
           window.alert("A new room has been added to : " + place.code);
-        }
+          document.location.reload();
+
+          }
       }
       else {
         window.alert("You must be logged in to create a new classroom!");
@@ -173,6 +175,19 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       //Display details
       $scope.showDetails($scope.listings[placeIndex], classIndex);
     };
+
+        //Delete a classroom
+        $scope.deleteClassroom = function (placeIndex, classIndex) {
+          console.log(placeIndex);  
+          console.log(classIndex);
+          console.log($scope.listings[placeIndex].classRoomArray);    
+          $scope.listings[placeIndex].classRoomArray.splice(classIndex, 1);
+          Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
+            console.log('Unable to update listing:', error);
+          });
+          document.location.reload();
+          window.alert($scope.listings[placeIndex].code + "" + $scope.listings[placeIndex].classRoomArray[classIndex].roomNumber + " has been deleted!");
+        }
 
     //What happens when the user hits the like button
     $scope.hitLike = function (placeIndex, classIndex) {
@@ -326,5 +341,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         return;
       }
     };
+
   }
 ]);

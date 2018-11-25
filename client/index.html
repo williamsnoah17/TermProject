@@ -54,7 +54,7 @@
                 <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
                 <input type="text" class="form-control" placeholder="Search" ng-model="filterText">
             </div>
-            <div ng-repeat="place in listings | filter: searchFilterCustom(place)">
+            <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-init="placeIndex = $index">
               <div class="btn-group" style="width:100%">
                 <button style="width:90%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
                 <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{$index}}">+</button>
@@ -99,8 +99,8 @@
           </div>
       </div>
                 <div id="classrooms{{$index}}" class="collapse">
-                    <div class="btn-group" ng-repeat="classroom in place.classRoomArray">
-                            <button style="width:8%" class="buildingButton" id="delete_button" ng-if="isAdmin()" ng-click="deleteClassroom($parent.$index, $index)">X</button>
+                    <div class="btn-group" ng-repeat="classroom in place.classRoomArray" ng-init="classIndex = $index">
+                            <button style="width:8%" class="buildingButton" id="delete_button{{placeIndex}}{{classIndex}}" ng-if="isAdmin()" ng-click="deleteClassroom(placeIndex, classIndex)">X</button>
                             <button style="width:8%" class="buildingButton like" id="likeButton{{$parent.$index}}{{$index}}" ng-click="hitLike($parent.$index, $index)">:)</button>
                             <button style="width:8%" class="buildingButton dislike" id="dislikeButton{{$parent.$index}}{{$index}}" ng-click="hitDislike($parent.$index, $index)">:|</button>
                             <button style="width:75%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-style="loadOccupied($parent.$index, $index)" ng-click="toggleOccupied($parent.$index, $index)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
