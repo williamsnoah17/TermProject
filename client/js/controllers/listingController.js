@@ -1,5 +1,6 @@
 angular.module('listings').controller('ListingsController', ['$scope', 'Listings',
   function ($scope, Listings) {
+    $scope.admins = ["mbarta@ufl.edu"];
     $scope.detailedInfo = {};
     $scope.roomInfo = {rating: {}};
     $scope.roomInfo.roomSize = "Small";
@@ -68,7 +69,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
   
           window.alert("A new room has been added to : " + place.code);
         }
-        location.reload();
       }
       else {
         window.alert("You must be logged in to create a new classroom!");
@@ -109,6 +109,21 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         }
       }
     };
+
+    $scope.isAdmin = function() {
+      const user = firebase.auth().currentUser;
+      if(user != null) {     
+        const userEmail = user.email;
+        console.log(userEmail);   
+        if($scope.admins.includes(userEmail)) {
+          return true;
+
+        } 
+      }
+      else {
+        return false;
+      }
+    }
 
     //Handles the style of the occupied button.
     $scope.loadOccupied = function (placeIndex, classIndex) {
@@ -311,6 +326,5 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         return;
       }
     };
-
   }
 ]);
