@@ -36,16 +36,36 @@
     <div class="col-md-7 left">
         <div id="map">
         </div>
-        <div id="details">
-            <h4 class="dummyText">{{detailedInfo.name}} | {{detailedInfo.code}}{{detailedInfo.classroom.roomNumber}}</h4>
-            <h4 class="dummyText">Description: {{detailedInfo.classroom.description}}</h4>
-            <h4 class="dummyText">Room Size : {{detailedInfo.classroom.roomSize}}</h4>
-            <h4 class="dummyText">Number of Outlets: {{detailedInfo.classroom.outlets}}</h4>
-            <h4 class="dummyText">Blackboard: {{detailedInfo.classroom.blackboard}}</h4>
-            <h4 class="dummyText">Whiteboard: {{detailedInfo.classroom.whiteboard}}</h4>
-            <h4 class="dummyText">Occupied: {{detailedInfo.classroom.isOccupied}}</h4>
-            <h4 class="dummyText">Likes: {{detailedInfo.classroom.rating.likes}}</h4>
-            <h4 class="dummyText">Dislikes: {{detailedInfo.classroom.rating.dislikes}}</h4>
+        <div class="card" id="details">
+          <img id="navLogo" src="img/nullclasslogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          <div class="detailHeader">
+            <h2 class="classroomDetails">
+              Classroom Details
+            </h2>
+          </div>
+            <div class="card-body">
+              <h5 class="card-title">Building Name</h5>
+                <p class="card-text">: {{detailedInfo.name}}</p>
+                <p class="card-text"> {{detailedInfo.code}}</p></br>
+              <h5 class="card-title">Room Number</h5>
+                <p class="card-text">: {{detailedInfo.classroom.roomNumber}}</p></br>
+              <h5 class="card-title">Description</h5>
+                <p class="card-text">: {{detailedInfo.classroom.description}}</p></br>
+              <h5 class="card-title">Room Size</h5>
+                <p class="card-text">: {{detailedInfo.classroom.roomSize}}</p></br>
+              <h5 class="card-title">Number of Outlets </h5>
+                <p class="card-text">: {{detailedInfo.classroom.outlets}}</p></br>
+              <h5 class="card-title">Blackboard</h5>
+                <p class="card-text">: {{detailedInfo.classroom.blackboard}}</p></br>
+              <h5 class="card-title">Whiteboard</h5>
+                <p class="card-text">: {{detailedInfo.classroom.whiteboard}}</p></br>
+              <h5 class="card-title">Occupied</h5>
+                <p class="card-text">: {{detailedInfo.classroom.isOccupied}}</p></br>
+              <h5 class="card-title">Likes</h5>
+                <p class="card-text">: {{detailedInfo.classroom.likes}}</p></br>
+              <h5 class="card-title">Dislikes</h5>
+                <p class="card-text">: {{detailedInfo.classroom.dislikes}}</p></br>
+            </div>
         </div>
     </div>
     <div class="col-md-4 right">
@@ -105,7 +125,7 @@
                             <button style="width:8%" class="buildingButton dislike" id="dislikeButton{{$parent.$index}}{{$index}}" ng-click="hitDislike($parent.$index, $index)">:|</button>
                             <button style="width:75%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-style="loadOccupied($parent.$index, $index)" ng-click="toggleOccupied($parent.$index, $index)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
                     </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -117,7 +137,7 @@
 <!-- MapBox API & Script-->
 
     <style>
-    
+
     .marker {
   background-image: url('img/nullclasslogostroke.png');
   background-size: cover;
@@ -134,7 +154,7 @@
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
-    
+
     </style>
 
    <script>
@@ -145,9 +165,9 @@
     [-82.372578, 29.627101], // Southwest coordinates
     [-82.337135, 29.654167]  // Northeast coordinates
     ];
-    
-   
-    
+
+
+
     var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/nullclass/cjnonj8w91fes2rtgvhhbmjtj',
@@ -155,9 +175,9 @@
     zoom: 15, // starting zoom
     maxBounds : bounds
 });
-       
-  
-      
+
+
+
 var geojson = {
   "features": [
     {
@@ -2351,7 +2371,7 @@ geojson.features.forEach(function(marker) {
   new mapboxgl.Marker(el)
   .setLngLat(marker.geometry.coordinates)
   .addTo(map);
-    
+
     //add popups to markers
     new mapboxgl.Marker(el)
   .setLngLat(marker.geometry.coordinates)
@@ -2360,13 +2380,13 @@ geojson.features.forEach(function(marker) {
   .addTo(map);
 });
 
-       
-       
 
- 
-       
 
-       
+
+
+
+
+
 </script>
 
 <!-- jQuery -->
