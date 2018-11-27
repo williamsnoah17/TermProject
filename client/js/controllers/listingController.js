@@ -30,6 +30,12 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     //Adding a classroom
     $scope.addClassroom = function (index, place) {
 
+      //Accounts for filtered data
+      if($scope.listings.indexOf(place) != index) {
+        index = $scope.listings.indexOf(place);
+      }
+
+      //Ensure the user is logged in prior to them adding a classroom.
       var user = firebase.auth().currentUser;
       if(user != null) {
         var roomInfo = $scope.roomInfo;
