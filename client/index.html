@@ -119,12 +119,12 @@
           </div>
       </div>
                 <div id="classrooms{{$index}}" class="collapse">
-                    <div class="btn-group" ng-repeat="classroom in place.classRoomArray" ng-init="classIndex = $index">
+                    <a href=#details style="text-decoration: none"><div class="btn-group" ng-repeat="classroom in place.classRoomArray" ng-init="classIndex = $index">
                             <button style="width:8%" class="buildingButton" id="delete_button{{placeIndex}}{{classIndex}}" ng-if="isAdmin()" ng-click="deleteClassroom(placeIndex, classIndex)">X</button>
                             <button style="width:8%" class="buildingButton like" id="likeButton{{$parent.$index}}{{$index}}" ng-click="hitLike($parent.$index, $index)">:)</button>
                             <button style="width:8%" class="buildingButton dislike" id="dislikeButton{{$parent.$index}}{{$index}}" ng-click="hitDislike($parent.$index, $index)">:|</button>
                             <button style="width:75%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-style="loadOccupied($parent.$index, $index)" ng-click="toggleOccupied($parent.$index, $index)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
-                    </div>
+                    </div></a>
 
                     </div>
                 </div>
