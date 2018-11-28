@@ -31,14 +31,16 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     $scope.addClassroom = function (index, place) {
 
       //Accounts for filtered data
-      if($scope.listings.indexOf(place) != index) {
-        index = $scope.listings.indexOf(place);
-      }
+      index = $scope.listings.indexOf(place);
+      
 
       //Ensure the user is logged in prior to them adding a classroom.
       var user = firebase.auth().currentUser;
       if(user != null) {
         var roomInfo = $scope.roomInfo;
+
+        console.log(roomInfo);
+
         var duplicateRoom = false;
   
         //Check if the room number already exists.
@@ -74,8 +76,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
           $scope.roomInfo.isOccupied = false;
 
           window.alert("A new room has been added to : " + place.code);
-          document.location.reload();
-
           }
       }
       else {
@@ -92,7 +92,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         console.log('Unable to delete listing:', error);
       });
       //Refresh the page upon deletion.
-      location.reload();
     };
 
     //Puts the information we need into the scope variable to be displayed.
@@ -183,16 +182,13 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     };
 
         //Delete a classroom
-        $scope.deleteClassroom = function (placeIndex, classIndex) {
-          console.log(placeIndex);  
-          console.log(classIndex);
-          console.log($scope.listings[placeIndex].classRoomArray);    
-          $scope.listings[placeIndex].classRoomArray.splice(classIndex, 1);
+        $scope.deleteClassroom = function (placeIndex, classIndex, classroom) { 
+          var roomNumber = classroom.roomNumber;
+          $scope.listings[placeIndex].classRoomArray.splice($scope.listings[placeIndex].classRoomArray.indexOf(classroom), 1);
           Listings.update($scope.listings[placeIndex]._id, $scope.listings[placeIndex]).then(function (response) { }, function (error) {
             console.log('Unable to update listing:', error);
           });
-          document.location.reload();
-          window.alert($scope.listings[placeIndex].code + "" + $scope.listings[placeIndex].classRoomArray[classIndex].roomNumber + " has been deleted!");
+          window.alert($scope.listings[placeIndex].code + "" + roomNumber + " has been deleted!");
         }
 
     //What happens when the user hits the like button

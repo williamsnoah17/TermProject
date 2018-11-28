@@ -97,17 +97,17 @@
                           <input type="text" placeholder="Description" ng-model="roomInfo.description">
                           <br>
                           <br>
-                          <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets">
+                          <input type="number" placeholder="Number of Outlets" ng-model="roomInfo.outlets" required>
                           <br>
                           <br>
                           Room Size:
-                          <input type="radio" ng-model="roomInfo.roomSize" value="Small" checked> Small
+                          <input type="radio" ng-model="roomInfo.roomSize" value="Small"> Small
                           <input type="radio" ng-model="roomInfo.roomSize" value="Medium"> Medium
                           <input type="radio" ng-model="roomInfo.roomSize" value="Large"> Large
                           <br>
                           <br>
-                          <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard"> Blackboard<br>
-                          <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard"> Whiteboard
+                          <input type="checkbox" ng-model="roomInfo.blackboard" value="blackboard" required> Blackboard<br>
+                          <input type="checkbox" ng-model="roomInfo.whiteboard" value="whiteboard" required> Whiteboard
                           <br><br>
                           <button ng-click="addClassroom($index, place)">Add Classroom</button>
                       </form>
@@ -120,7 +120,7 @@
       </div>
                 <div id="classrooms{{$index}}" class="collapse">
                     <a href=#details style="text-decoration: none"><div class="btn-group" ng-repeat="classroom in place.classRoomArray" ng-init="classIndex = $index">
-                            <button style="width:8%" class="buildingButton" id="delete_button{{placeIndex}}{{classIndex}}" ng-if="isAdmin()" ng-click="deleteClassroom(placeIndex, classIndex)">X</button>
+                            <button style="width:8%" class="buildingButton" id="delete_button{{placeIndex}}{{classIndex}}" ng-if="isAdmin()" ng-click="deleteClassroom(placeIndex, classIndex, classroom)">X</button>
                             <button style="width:8%" class="buildingButton like" id="likeButton{{$parent.$index}}{{$index}}" ng-click="hitLike($parent.$index, $index)">:)</button>
                             <button style="width:8%" class="buildingButton dislike" id="dislikeButton{{$parent.$index}}{{$index}}" ng-click="hitDislike($parent.$index, $index)">:|</button>
                             <button style="width:75%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-style="loadOccupied($parent.$index, $index)" ng-click="toggleOccupied($parent.$index, $index)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
