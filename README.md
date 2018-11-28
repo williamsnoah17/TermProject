@@ -24,4 +24,4 @@ Noah Williams - Backend Dev
 
 Matthew Barta - Frontend Dev
 
-Nicholas Miller - Frontend Dev
+Nicholas "Gone but not Forgotten" Miller - Updated the Blog Once
