@@ -76,7 +76,7 @@
             </div>
             <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-init="placeIndex = $index">
               <div class="btn-group" style="width:100%">
-                <button id=building{{placeIndex}} style="width:90%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                <button id=building{{listings[$index].code}} style="width:90%" class="buildingButton" data-toggle="collapse" onclick="flyTo([place.coordinates]);" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
                 <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}">+</button>
               </div>
 
@@ -172,7 +172,6 @@
     zoom: 15, // starting zoom
     maxBounds : bounds
 });
-
 
 
 var geojson = {
@@ -2375,9 +2374,15 @@ geojson.features.forEach(function(marker) {
   .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
   .setHTML(ClassroomButton(marker)))
   .addTo(map);
-            
     
 });
+
+        function flyTo(coordinates) {
+            map.flyTo({
+                center: coordinates
+            });
+        }
+
        function ClassroomButton(marker){
         var html = '';
         html += '<h3>' + marker.properties.Name + '</h3><p>' + marker.properties.Address + '</p>';
@@ -2385,7 +2390,6 @@ geojson.features.forEach(function(marker) {
         html += "<button style='width:100%' class='buildingButton' type='button' data-toggle='modal' data-target='#myModal"+marker.properties.Code+"'>Add Classroom in " + marker.properties.Code + "</button>";
         html += "</div>";
            return html;
-        
     } 
 
 
