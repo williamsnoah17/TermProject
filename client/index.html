@@ -76,7 +76,7 @@
             </div>
             <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-init="placeIndex = $index">
               <div class="btn-group" style="width:100%">
-                <button id="flyTo" value="{{place.coordinates.longitude}}" name="{{place.coordinates.latitude}}" onclick="flyTo()" style="width:90%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                <button id={{place.code}} value="{{place.coordinates.longitude}}" name="{{place.coordinates.latitude}}" param="{{place.code}}" onclick="flyTo(this)" style="width:90%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
                 <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}">+</button>
               </div>
 
@@ -172,6 +172,8 @@
     zoom: 15, // starting zoom
     maxBounds : bounds
 });
+
+ map.addControl(new mapboxgl.NavigationControl());
 
 
 var geojson = {
@@ -2377,16 +2379,14 @@ geojson.features.forEach(function(marker) {
     
 });
 
-function flyTo() {
-    var longitude, latitude;
-    longitude = document.getElementById("flyTo").value;
-    latitude = document.getElementById("flyTo").name;
-    //longitude = place.coordinates.longitude;
-    //latitude = place.coordinates.latitude;
-    console.log(longitude);
-    console.log(latitude);
+function flyTo(place) {
+    var longitude, latitude, code;
+    code = place.id;
+    longitude = document.getElementById(code).value;
+    latitude = document.getElementById(code).name;
             map.flyTo({
-                center: [longitude,latitude]
+                center: [longitude, latitude],
+                zoom:17
             });
         }
 
