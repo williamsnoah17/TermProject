@@ -32,7 +32,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
       //Accounts for filtered data
       index = $scope.listings.indexOf(place);
-      
 
       //Ensure the user is logged in prior to them adding a classroom.
       var user = firebase.auth().currentUser;
@@ -40,6 +39,10 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
         var roomInfo = $scope.roomInfo;
 
         console.log(roomInfo);
+        if(roomInfo.roomNumber == null || roomInfo.outlets == null || roomInfo.description == null || roomInfo.description == '') {
+          window.alert("Must fill in all the fields to add a classroom!");
+          return;
+        }
 
         var duplicateRoom = false;
   
@@ -76,7 +79,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
           $scope.roomInfo.isOccupied = false;
 
           window.alert("A new room has been added to : " + place.code);
-          location.reload();
+          
           }
       }
       else {
