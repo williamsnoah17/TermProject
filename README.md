@@ -1,4 +1,4 @@
-
+![image](https://user-images.githubusercontent.com/22204111/49348949-450f3b00-f676-11e8-9767-842f67799ddf.png)
 # Null Class @ UF
 
 ## Product Overview
@@ -14,6 +14,24 @@ Why We Are Different.
 
 Our application allows students to not only add and rate classrooms but also provides a more thorough description depending on the students unique study habits. Our classroom descriptions will also show details such as: type of seating (wooden desks vs. tables), study mediums (chalkboards vs. whiteboards vs. projectors), number of outlets, and the type of study environment (collaborative vs. silent).
 
+How To Get Started:
+
+Students can easily start using Null Class by signing up using their @ufl.edu email address. Once they are signed up they can login with their @ufl.edu email and password used to signup.
+![image](https://user-images.githubusercontent.com/22204111/49348530-f52f7480-f673-11e8-812f-c9259cd4d006.png)
+
+Once signed up to use Null Class students can now see a map of the University of Florida implemented using the MapBox API. 
+![image](https://user-images.githubusercontent.com/22204111/49348595-450e3b80-f674-11e8-8dfd-cbdcdc6f118a.png)
+
+Students can also:
+  Select a Building and see all Classrooms associated with it:
+  ![image](https://user-images.githubusercontent.com/22204111/49348822-b8fd1380-f675-11e8-9d35-3821b91b0695.png)
+
+  Add a custom class room:
+  ![image](https://user-images.githubusercontent.com/22204111/49348875-fbbeeb80-f675-11e8-947d-47a406bb4258.png)
+
+  View detailed room Descriptions:
+  ![image](https://user-images.githubusercontent.com/22204111/49348804-9b2fae80-f675-11e8-8f52-29a121ead7b7.png)
+
 ## Team Members:
 
 McKenna Ville - Scrum Master
@@ -24,4 +42,4 @@ Noah Williams - Backend Dev
 
 Matthew Barta - Frontend Dev
 
-Nicholas "Gone but not Forgotten" Miller - Updated the Blog Once
+Nicholas "Gone but not Forgotten" Miller - Updated the Blog Once/Credited for coming up with "Null Class"
