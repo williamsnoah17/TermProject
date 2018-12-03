@@ -76,7 +76,7 @@
             </div>
             <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-init="placeIndex = $index">
               <div class="btn-group" style="width:100%">
-                <button id=building{{listings[$index].code}} style="width:90%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
+                <button id=building{{listings[$index].code}} style="width:90%" class="buildingButton" data-toggle="collapse" onclick="flyTo(place.coordinates)" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
                 <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}">+</button>
               </div>
 
