@@ -77,11 +77,11 @@
             <div ng-repeat="place in listings | filter: searchFilterCustom(place)" ng-init="placeIndex = $index">
               <div class="btn-group" style="width:100%">
                 <button id=building{{placeIndex}} style="width:90%" class="buildingButton" data-toggle="collapse" data-target="#classrooms{{$index}}">{{place.code}} | {{place.name}}</button>
-                <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{$index}}">+</button>
+                <button style="width:10%" class="buildingButton" type="button" data-toggle="modal" data-target="#myModal{{listings[$index].code}}">+</button>
               </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="myModal{{$index}}" role="dialog">
+                <div class="modal fade" id="myModal{{listings[$index].code}}" role="dialog">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -2382,48 +2382,9 @@ geojson.features.forEach(function(marker) {
         var html = '';
         html += '<h3>' + marker.properties.Name + '</h3><p>' + marker.properties.Address + '</p>';
         html += "<div>";
-        html += "<button style='width:100%' class='buildingButton' type='button' data-toggle='modal' data-target='myModal{{$index}}'>Add Classroom</button>";
+        html += "<button style='width:100%' class='buildingButton' type='button' data-toggle='modal' data-target='#myModal"+marker.properties.Code+"'>Add Classroom in " + marker.properties.Code + "</button>";
         html += "</div>";
-        html += "<div class='modal fade' id='myModal{{$index}}' role='dialog'>";
-        html += "<div class='modal-dialog modal-lg'>";
-        html += "<div class='modal-content'>";
-        html += "<div class='modal-header'>";
-        html += "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
-        html += "<h4 class='modal-title'>Add Classroom in"+ marker.properties.Code+" | "+marker.properties.Name+"</h4>";
-        html += "</div>";
-        html += "<div class='modal-body'>";
-        html += "<form>";
-        html += "<br>";
-        html += "<input type='number' placeholder='Room Number' ng-model='roomInfo.roomNumber'>";
-        html += "<br>";
-        html += "<br>";
-        html += "<input type='text' placeholder='Description' ng-model='roomInfo.description'>";
-        html += "<br>";
-        html += "<br>";
-        html += "<input type='number' placeholder='Number of Outlets' ng-model='roomInfo.outlets' required>";
-        html += "<br>";
-        html += "<br>";
-        html += "Room Size:";
-        html += "<input type='radio' ng-model='roomInfo.roomSize' value='Small'> Small";
-        html += "<input type='radio' ng-model='roomInfo.roomSize' value='Medium'> Medium";
-        html += "<input type='radio' ng-model='roomInfo.roomSize' value='Large'> Large";
-        html += "<br>";
-        html += "<br>";
-        html += "<input type='checkbox' ng-model='roomInfo.blackboard' value='blackboard' required> Blackboard<br>";
-        html += "<input type='checkbox' ng-model='roomInfo.whiteboard' value='whiteboard' required> Whiteboard";
-        html += "<br><br>";
-        html += "<button ng-click='addClassroom($index, place)'>Add Classroom</button>";
-        html += "</form>";
-        html += "</div>";
-        html += "<div class='modal-footer'>";
-        html += "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
-        html += "</div>";
-        html += "</div>";
-        html += "</div>";
-        html += "</div>";
-
            return html;
-        
         
     } 
 
@@ -2450,7 +2411,7 @@ geojson.features.forEach(function(marker) {
 <script src="js/factories/listingFactory.js"></script>
 <script src="js/controllers/listingController.js"></script>
 
-<!-- Firebase & AngularFire-->
+<!-- Firebase API & AngularFire API-->
 <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
 <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 <script>
