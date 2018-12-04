@@ -79,7 +79,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
           $scope.roomInfo.isOccupied = false;
 
           window.alert("A new room has been added to : " + place.code);
-          
+          location.reload();
           }
       }
       else {
