@@ -121,8 +121,8 @@
                 <div id="classrooms{{$index}}" class="collapse">
                     <a href=#details style="text-decoration: none"><div class="btn-group" ng-repeat="classroom in place.classRoomArray" ng-init="classIndex = $index">
                             <button style="width:8%" class="buildingButton" id="delete_button{{placeIndex}}{{classIndex}}" ng-if="isAdmin()" ng-click="deleteClassroom(placeIndex, classIndex, classroom)">X</button>
-                            <button style="width:8%" class="buildingButton like" id="likeButton{{$parent.$index}}{{$index}}" ng-click="hitLike($parent.$index, $index)">:)</button>
-                            <button style="width:8%" class="buildingButton dislike" id="dislikeButton{{$parent.$index}}{{$index}}" ng-click="hitDislike($parent.$index, $index)">:|</button>
+                            <button style="width:8%" class="buildingButton like" id="likeButton{{$parent.$index}}{{$index}}" ng-click="hitLike($parent.$index, $index)" ng-style="loadLike($parent.$index, $index)"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+                            <button style="width:8%" class="buildingButton dislike" id="dislikeButton{{$parent.$index}}{{$index}}" ng-click="hitDislike($parent.$index, $index)" ng-style="loadDislike($parent.$index, $index)"> <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></button>
                             <button style="width:75%" class="buildingButton" id="classNum{{$index}}" ng-click="showDetails(place, $index)">{{place.code}}{{classroom.roomNumber}}<button ng-style="loadOccupied($parent.$index, $index)" ng-click="toggleOccupied($parent.$index, $index)" id="occupiedButton{{$parent.$index}}{{$index}}"></button></button>
                     </div></a>
 

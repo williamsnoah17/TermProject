@@ -155,6 +155,66 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       }
     };
 
+
+        //Toggles the occupancy of the classroom.
+        $scope.loadLike = function (placeIndex, classIndex) {
+          var user = firebase.auth().currentUser;
+          //Dislay the name of the user logged in.
+          if(user != null) {
+            var hasLiked = false;
+        const email = user.email;
+
+        //Check if the user has liked the post.
+        var likedIndex = 0;
+        for (likedIndex = 0; likedIndex < $scope.listings[placeIndex].classRoomArray[classIndex].likedBy.length; likedIndex++) {
+          if ($scope.listings[placeIndex].classRoomArray[classIndex].likedBy[likedIndex] == email) {
+            hasLiked = true;
+            break;
+          }
+        }
+          }
+          if(hasLiked) {
+            return {
+              "background-color": '#8ac8ff'
+          }
+          }
+          else {
+            return {
+              "background-color": 'aliceblue'
+          }
+          }
+        };
+
+        //Toggles the occupancy of the classroom.
+        $scope.loadDislike = function (placeIndex, classIndex) {
+          var user = firebase.auth().currentUser;
+          //Dislay the name of the user logged in.
+          if(user != null) {
+            var hasDisliked = false;
+        const email = user.email;
+
+        //Check if the user has liked the post.
+        var dislikedIndex = 0;
+        for (dislikedIndex = 0; dislikedIndex < $scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy.length; dislikedIndex++) {
+          if ($scope.listings[placeIndex].classRoomArray[classIndex].dislikedBy[dislikedIndex] == email) {
+            hasDisliked = true;
+            break;
+          }
+        }
+          }
+          if(hasDisliked) {
+            return {
+              "background-color": '#8ac8ff'
+          }
+          }
+          else {
+            return {
+              "background-color": 'aliceblue'
+          }
+          }
+        };
+
+
     //Toggles the occupancy of the classroom.
     $scope.toggleOccupied = function (placeIndex, classIndex) {
 
@@ -180,7 +240,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       else {
         window.alert("You must be logged in to use this feature!");
       }
-
       //Display details
       $scope.showDetails($scope.listings[placeIndex], classIndex);
     };
